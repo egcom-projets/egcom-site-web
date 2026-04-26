@@ -259,15 +259,66 @@
             };
             
             try {
-                // Envoyer l'email via EmailJS
-                const response = await emailjs.send(
+                // 1. Envoyer l'email à EGCOM avec les détails de la demande
+                const responseToEGCOM = await emailjs.send(
                     EMAILJS_SERVICE_ID,
                     EMAILJS_TEMPLATE_ID,
-                    templateParams
+                    {
+                        to_email: 'egcom.projets23@gmail.com',
+                        name: templateParams.name,
+                        email: templateParams.email,
+                        phone: templateParams.phone,
+                        projectType: templateParams.projectType,
+                        city: templateParams.city,
+                        budget: templateParams.budget,
+                        message: templateParams.message
+                    }
                 );
                 
-                console.log('Email envoyé avec succès!', response.status, response.text);
-                formMessage.innerHTML = '<strong>✓ Message envoyé avec succès !</strong><br>Merci pour votre message. Nous avons bien reçu votre demande et nous vous répondrons dans les plus brefs délais (sous 24-48h).';
+                console.log('Email envoyé à EGCOM avec succès!', responseToEGCOM.status);
+                
+                // 2. Envoyer l'email de confirmation au client
+                const confirmationMessage = `Bonjour ${templateParams.name},
+
+Merci d'avoir contacté EGCOM-PROJETS !
+
+Nous avons bien reçu votre demande concernant votre projet. Notre service d'ingénierie prendra contact avec vous pour comprendre votre projet en détails sous un bref délai (24-48h maximum).
+
+Chez EGCOM-PROJETS, nous sommes convaincus que chaque projet incarne une ambition, une vision et une promesse d'avenir. Cette conviction guide chacune de nos actions dans le management de projets BTP, la réalisation d'infrastructures durables et l'accompagnement stratégique de nos partenaires.
+
+Récapitulatif de votre demande :
+- Nom : ${templateParams.name}
+- Email : ${templateParams.email}
+- Téléphone : ${templateParams.phone}
+- Type de projet : ${templateParams.projectType}
+- Ville : ${templateParams.city}
+- Budget : ${templateParams.budget}
+- Message : ${templateParams.message}
+
+Nous vous remercions de votre confiance et restons à votre disposition pour toute question.
+
+Cordialement,
+L'équipe EGCOM-PROJETS
+Email : egcom.projets23@gmail.com`;
+
+                const responseToClient = await emailjs.send(
+                    EMAILJS_SERVICE_ID,
+                    EMAILJS_TEMPLATE_ID,
+                    {
+                        to_email: templateParams.email,
+                        name: 'EGCOM-PROJETS',
+                        email: 'egcom.projets23@gmail.com',
+                        phone: '',
+                        projectType: 'Confirmation de réception',
+                        city: '',
+                        budget: '',
+                        message: confirmationMessage
+                    }
+                );
+                
+                console.log('Email de confirmation envoyé au client avec succès!', responseToClient.status);
+                
+                formMessage.innerHTML = '<strong>✓ Message envoyé avec succès !</strong><br>Merci pour votre message. Nous avons bien reçu votre demande et vous avez reçu un email de confirmation. Nous vous répondrons dans les plus brefs délais (sous 24-48h).';
                 formMessage.className = 'form-message success';
                 formMessage.style.display = 'block';
                 document.getElementById('contactForm').reset();
