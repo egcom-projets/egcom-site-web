@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - EGCOM</title>
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <div class="login-container">
+        <h1>EGCOM Admin</h1>
+        <form id="loginForm" class="contact-form">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Mot de passe</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            
+            <div id="loginMessage" class="form-message"></div>
+            
+            <button type="submit" class="btn-primary" style="width: 100%;">
+                <span class="btn-text">SE CONNECTER</span>
+                <span class="btn-loading" style="display: none;">Connexion...</span>
+            </button>
+        </form>
+    </div>
+
+    <script src="../assets/js/supabase-client.js"></script>
+    <script src="../assets/js/admin.js"></script>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            const btnText = submitBtn.querySelector('.btn-text');
+            const btnLoading = submitBtn.querySelector('.btn-loading');
+            const loginMessage = document.getElementById('loginMessage');
+            
+            btnText.style.display = 'none';
+            btnLoading.style.display = 'inline';
+            submitBtn.disabled = true;
+            loginMessage.textContent = '';
+            loginMessage.className = 'form-message';
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            try {
+                await login(email, password);
+            } catch (error) {
+                loginMessage.textContent = '✗ ' + (error.message || 'Erreur de connexion');
+                loginMessage.className = 'form-message error';
+                btnText.style.display = 'inline';
+                btnLoading.style.display = 'none';
+                submitBtn.disabled = false;
+            }
+        });
+        
+        async function checkIfAlreadyLoggedIn() {
+            const { data: { user } } = await supabaseClient.auth.getUser();
+            if (user) {
+                window.location.href = 'index.html';
+            }
+        }
+        
+        checkIfAlreadyLoggedIn();
+    </script>
+</body>
+</html>

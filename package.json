@@ -1,0 +1,14 @@
+{
+  "name": "egcom-website",
+  "version": "1.0.0",
+  "description": "Site web EGCOM - Construction et Management de Projets BTP",
+  "scripts": {
+    "dev": "netlify dev"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.39.0"
+  },
+  "devDependencies": {
+    "netlify-cli": "^17.0.0"
+  }
+}

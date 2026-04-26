@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modifier Projet - EGCOM</title>
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <div class="admin-container">
+        <div class="admin-header">
+            <h1 id="pageTitle">Nouveau Projet</h1>
+            <div>
+                <a href="index.html" class="btn-secondary">← Retour</a>
+                <button onclick="logout()" class="btn-secondary" style="margin-left: 10px;">Déconnexion</button>
+            </div>
+        </div>
+
+        <div style="max-width: 800px; margin: 0 auto; background: white; padding: 40px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <form id="projectForm" class="contact-form">
+                <div class="form-group">
+                    <label for="title">Titre du projet *</label>
+                    <input type="text" id="title" name="title" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="location">Lieu</label>
+                    <input type="text" id="location" name="location" placeholder="Ex: Paris, France">
+                </div>
+
+                <div class="form-group">
+                    <label for="year">Année</label>
+                    <input type="number" id="year" name="year" min="2000" max="2100" placeholder="Ex: 2024">
+                </div>
+
+                <div class="form-group">
+                    <label for="category">Catégorie *</label>
+                    <select id="category" name="category" required>
+                        <option value="">-- Sélectionnez --</option>
+                        <option value="construction">Construction</option>
+                        <option value="renovation">Rénovation</option>
+                        <option value="management">Management</option>
+                        <option value="autre">Autre</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea id="description" name="description" rows="5" placeholder="Décrivez le projet..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="coverImage">Image de couverture</label>
+                    <input type="file" id="coverImage" accept="image/*">
+                    <div id="currentImage" style="margin-top: 10px;"></div>
+                </div>
+
+                <div id="formMessage" class="form-message"></div>
+
+                <button type="submit" class="btn-primary" style="width: 100%;">
+                    <span class="btn-text">ENREGISTRER</span>
+                    <span class="btn-loading" style="display: none;">Enregistrement...</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script src="../assets/js/supabase-client.js"></script>
+    <script src="../assets/js/admin.js"></script>
+    <script>
+        let currentProjectId = null;
+
+        async function init() {
+            await checkAuth();
+            
+            const urlParams = new URLSearchParams(window.location.search);
+            const projectId = urlParams.get('id');
+            
+            if (projectId) {
+                currentProjectId = projectId;
+                document.getElementById('pageTitle').textContent = 'Modifier le Projet';
+                await loadProject(projectId);
+            }
+        }
+
+        async function loadProject(projectId) {
+            const project = await loadProjectForEdit(projectId);
+            
+            if (!project) {
+                alert('Projet introuvable');
+                window.location.href = 'index.html';
+                return;
+            }
+            
+            document.getElementById('title').value = project.title || '';
+            document.getElementById('location').value = project.location || '';
+            document.getElementById('year').value = project.year || '';
+            document.getElementById('category').value = project.category || '';
+            document.getElementById('description').value = project.description || '';
+            
+            if (project.cover_image_url) {
+                document.getElementById('currentImage').innerHTML = `
+                    <p style="font-size: 14px; color: #6B7280; margin-bottom: 5px;">Image actuelle:</p>
+                    <img src="${project.cover_image_url}" alt="Current" style="max-width: 200px; border-radius: 4px;">
+                `;
+            }
+        }
+
+        document.getElementById('projectForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            const btnText = submitBtn.querySelector('.btn-text');
+            const btnLoading = submitBtn.querySelector('.btn-loading');
+            const formMessage = document.getElementById('formMessage');
+            
+            btnText.style.display = 'none';
+            btnLoading.style.display = 'inline';
+            submitBtn.disabled = true;
+            formMessage.textContent = '';
+            formMessage.className = 'form-message';
+            
+            try {
+                let coverImageUrl = null;
+                const coverImageFile = document.getElementById('coverImage').files[0];
+                
+                if (coverImageFile) {
+                    formMessage.textContent = 'Upload de l\'image...';
+                    formMessage.className = 'form-message';
+                    coverImageUrl = await uploadImage(coverImageFile);
+                }
+                
+                const projectData = {
+                    title: document.getElementById('title').value,
+                    location: document.getElementById('location').value || null,
+                    year: document.getElementById('year').value ? parseInt(document.getElementById('year').value) : null,
+                    category: document.getElementById('category').value,
+                    description: document.getElementById('description').value || null
+                };
+                
+                if (coverImageUrl) {
+                    projectData.cover_image_url = coverImageUrl;
+                }
+                
+                await saveProject(projectData, currentProjectId);
+                
+                formMessage.textContent = '✓ Projet enregistré avec succès !';
+                formMessage.className = 'form-message success';
+                
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 1500);
+                
+            } catch (error) {
+                formMessage.textContent = '✗ Erreur: ' + error.message;
+                formMessage.className = 'form-message error';
+                btnText.style.display = 'inline';
+                btnLoading.style.display = 'none';
+                submitBtn.disabled = false;
+            }
+        });
+
+        init();
+    </script>
+</body>
+</html>
