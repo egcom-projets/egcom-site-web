@@ -260,22 +260,29 @@
             
             try {
                 // 1. Envoyer l'email à EGCOM avec les détails de la demande
-                const responseToEGCOM = await emailjs.send(
-                    EMAILJS_SERVICE_ID,
-                    EMAILJS_TEMPLATE_ID,
-                    {
-                        to_email: 'egcom.projets23@gmail.com',
-                        name: templateParams.name,
-                        email: templateParams.email,
-                        phone: templateParams.phone,
-                        projectType: templateParams.projectType,
-                        city: templateParams.city,
-                        budget: templateParams.budget,
-                        message: templateParams.message
-                    }
-                );
+                await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        service_id: EMAILJS_SERVICE_ID,
+                        template_id: EMAILJS_TEMPLATE_ID,
+                        user_id: EMAILJS_PUBLIC_KEY,
+                        template_params: {
+                            to_email: 'egcom.projets23@gmail.com',
+                            name: templateParams.name,
+                            email: templateParams.email,
+                            phone: templateParams.phone,
+                            projectType: templateParams.projectType,
+                            city: templateParams.city,
+                            budget: templateParams.budget,
+                            message: templateParams.message
+                        }
+                    })
+                });
                 
-                console.log('Email envoyé à EGCOM avec succès!', responseToEGCOM.status);
+                console.log('Email envoyé à EGCOM avec succès!');
                 
                 // 2. Envoyer l'email de confirmation au client
                 const confirmationMessage = `Bonjour Monsieur/Madame,
@@ -291,21 +298,29 @@ Nous nous réjouissons de collaborer avec vous.
 Cordialement,
 L'équipe EGCOMP-PROJETS`;
 
-                const responseToClient = await emailjs.send(
-                    EMAILJS_SERVICE_ID,
-                    EMAILJS_TEMPLATE_ID,
-                    {
-                        name: templateParams.name,
-                        email: templateParams.email,
-                        phone: '',
-                        projectType: '',
-                        city: '',
-                        budget: '',
-                        message: confirmationMessage
-                    }
-                );
+                await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        service_id: EMAILJS_SERVICE_ID,
+                        template_id: EMAILJS_TEMPLATE_ID,
+                        user_id: EMAILJS_PUBLIC_KEY,
+                        template_params: {
+                            to_email: templateParams.email,
+                            name: 'EGCOMP-PROJETS',
+                            email: 'egcom.projets23@gmail.com',
+                            phone: '',
+                            projectType: '',
+                            city: '',
+                            budget: '',
+                            message: confirmationMessage
+                        }
+                    })
+                });
                 
-                console.log('Email de confirmation envoyé au client avec succès!', responseToClient.status);
+                console.log('Email de confirmation envoyé au client avec succès!');
                 
                 formMessage.innerHTML = '<strong>✓ Message envoyé avec succès !</strong><br>Merci pour votre message. Nous avons bien reçu votre demande et vous avez reçu un email de confirmation. Nous vous répondrons dans les plus brefs délais (sous 24-48h).';
                 formMessage.className = 'form-message success';
