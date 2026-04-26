@@ -267,9 +267,13 @@
                 );
                 
                 console.log('Email envoyé avec succès!', response.status, response.text);
-                formMessage.textContent = '✓ Message envoyé avec succès ! Nous vous répondrons dans les plus brefs délais.';
+                formMessage.innerHTML = '<strong>✓ Message envoyé avec succès !</strong><br>Merci pour votre message. Nous avons bien reçu votre demande et nous vous répondrons dans les plus brefs délais (sous 24-48h).';
                 formMessage.className = 'form-message success';
+                formMessage.style.display = 'block';
                 document.getElementById('contactForm').reset();
+                
+                // Faire défiler jusqu'au message de confirmation
+                formMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 
             } catch (error) {
                 console.error('Erreur lors de l\'envoi:', error);
