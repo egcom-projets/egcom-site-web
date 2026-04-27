@@ -739,7 +739,29 @@ a {
     border: 3px solid #0033CC;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 51, 204, 0.15);
-    text-align: center;
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    gap: 40px;
+    align-items: start;
+}
+
+.ceo-photo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ceo-photo-img {
+    width: 100%;
+    max-width: 250px;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(0, 51, 204, 0.2);
+    border: 4px solid #0033CC;
+}
+
+.ceo-info-container {
+    text-align: left;
 }
 
 .ceo-name {
