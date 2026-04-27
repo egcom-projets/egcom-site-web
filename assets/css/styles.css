@@ -90,22 +90,23 @@ a {
 }
 
 .nav-wrapper {
-    display: grid;
-    grid-template-columns: auto 1fr auto auto;
-    gap: 20px;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    padding: 15px 0;
+    padding: 12px 0;
     position: relative;
+    gap: 15px;
 }
 
 .logo {
     background: white;
-    padding: 8px 20px;
+    padding: 6px 15px;
     transition: all 0.3s ease;
     display: flex;
     align-items: center;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0;
 }
 
 .logo a {
@@ -114,10 +115,9 @@ a {
 }
 
 .logo img {
-    height: 55px;
+    height: 45px;
     width: auto;
     display: block;
-    max-width: 100%;
 }
 
 .logo:hover {
@@ -133,18 +133,19 @@ a {
 .nav-menu {
     display: flex;
     list-style: none;
-    gap: 12px;
-    flex-wrap: wrap;
+    gap: 8px;
+    flex-wrap: nowrap;
+    flex-grow: 1;
     justify-content: center;
 }
 
 .nav-link {
     color: white;
     font-weight: 700;
-    font-size: 13px;
-    letter-spacing: 0.5px;
+    font-size: 11px;
+    letter-spacing: 0.3px;
     transition: all 0.3s;
-    padding: 12px 18px;
+    padding: 10px 14px;
     white-space: nowrap;
     border-radius: 6px;
     position: relative;
@@ -168,10 +169,10 @@ a {
 .btn-primary {
     background: linear-gradient(145deg, #DC143C 0%, #B01030 100%);
     color: white;
-    padding: 12px 24px;
+    padding: 10px 18px;
     border-radius: 6px;
     font-weight: 700;
-    font-size: 13px;
+    font-size: 11px;
     border: none;
     cursor: pointer;
     transition: all 0.3s;
@@ -183,6 +184,7 @@ a {
     position: relative;
     overflow: hidden;
     white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .btn-primary::before {
@@ -245,21 +247,23 @@ a {
 /* Language Switcher */
 .language-switcher {
     display: flex;
-    gap: 10px;
+    gap: 6px;
     align-items: center;
+    flex-shrink: 0;
 }
 
 .lang-btn {
     background: white;
     color: #003366;
     border: 2px solid #003366;
-    padding: 8px 16px;
+    padding: 8px 12px;
     border-radius: 6px;
     font-weight: 700;
-    font-size: 13px;
+    font-size: 11px;
     cursor: pointer;
     transition: all 0.3s;
     box-shadow: 0 2px 6px rgba(0, 51, 102, 0.15);
+    flex-shrink: 0;
 }
 
 .lang-btn:hover,
