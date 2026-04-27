@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diaspora Africaine - Réalisez vos Projets Immobiliers en Afrique - EGCOM</title>
+    <meta name="description" content="Vous résidez à l'international ? Réalisez vos rêves immobiliers en Afrique avec l'accompagnement d'EGCOM-PROJETS">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WH05VV1KFP"></script>
+    <script src="assets/js/analytics.js"></script>
+    <style>
+        .diaspora-hero {
+            background: linear-gradient(135deg, #003366 0%, #0066CC 100%);
+            padding: 100px 0 80px;
+            color: white;
+            text-align: center;
+        }
+        
+        .diaspora-hero h1 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        .diaspora-hero p {
+            font-size: 20px;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            line-height: 1.6;
+        }
+        
+        .diaspora-hero .flag-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+        }
+        
+        .benefits-section {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .benefit-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .benefit-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .benefit-card .icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        
+        .benefit-card h3 {
+            color: #003366;
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+        
+        .benefit-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .booking-section {
+            padding: 80px 0;
+            background: white;
+        }
+        
+        .booking-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .booking-intro {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .booking-intro h2 {
+            font-size: 36px;
+            color: #003366;
+            margin-bottom: 20px;
+        }
+        
+        .booking-intro p {
+            font-size: 18px;
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .booking-form {
+            background: #f8f9fa;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #003366;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            font-family: inherit;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #0066CC;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .time-slots {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .time-slot {
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: white;
+        }
+        
+        .time-slot:hover {
+            border-color: #0066CC;
+            background: #f0f7ff;
+        }
+        
+        .time-slot.selected {
+            background: #0066CC;
+            color: white;
+            border-color: #0066CC;
+        }
+        
+        .time-slot.unavailable {
+            background: #f5f5f5;
+            color: #999;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+        
+        .submit-btn {
+            background: #DC143C;
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background: #B01030;
+        }
+        
+        .submit-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .booking-message {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            display: none;
+        }
+        
+        .booking-message.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .booking-message.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .info-box {
+            background: #e3f2fd;
+            border-left: 4px solid #0066CC;
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 5px;
+        }
+        
+        .info-box h4 {
+            color: #003366;
+            margin-bottom: 10px;
+        }
+        
+        .info-box ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .info-box ul li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .info-box ul li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #0066CC;
+            font-weight: bold;
+        }
+        
+        @media (max-width: 768px) {
+            .diaspora-hero h1 {
+                font-size: 32px;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .time-slots {
+                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header" id="header">
+        <div class="header-top">
+            <div class="container">
+                <div class="header-top-content">
+                    <div class="contact-info">
+                        <span>QUESTIONS? Téléphone: +224 625 482 747</span>
+                    </div>
+                    <div class="language-switcher">
+                        <a href="#" class="lang-link active">FR</a>
+                        <a href="#" class="lang-link">EN</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-wrapper">
+                    <div class="logo">
+                        <a href="index.html">
+                            <img src="Logo%20version%20nouvelle/Logo%2026%2004%2026.png" alt="EGCOM-PROJETS BTP" style="height: 50px;">
+                        </a>
+                    </div>
+                    
+                    <ul class="nav-menu" id="navMenu">
+                        <li><a href="index.html" class="nav-link">ACCUEIL</a></li>
+                        <li><a href="services.html" class="nav-link">SERVICES</a></li>
+                        <li><a href="mots-du-pdg.html" class="nav-link">MOT DU PDG</a></li>
+                        <li><a href="references.html" class="nav-link">RÉFÉRENCES</a></li>
+                        <li><a href="formation.html" class="nav-link">FORMATION</a></li>
+                        <li><a href="carrieres.html" class="nav-link">CARRIÈRES</a></li>
+                        <li><a href="realisations.html" class="nav-link">RÉALISATIONS</a></li>
+                        <li><a href="a-propos.html" class="nav-link">À PROPOS</a></li>
+                        <li><a href="diaspora.html" class="nav-link active">DIASPORA</a></li>
+                        <li><a href="contact.html" class="nav-link">CONTACT</a></li>
+                    </ul>
+                    
+                    <a href="contact.html" class="btn-primary">CONTACTER EGCOM</a>
+                    
+                    <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <section class="diaspora-hero">
+        <div class="container">
+            <div class="flag-icon">🌍</div>
+            <h1>DIASPORA AFRICAINE</h1>
+            <p>Vous résidez à l'international et souhaitez réaliser vos rêves dans l'immobilier en Afrique ? Réservez votre rendez-vous pour échanger avec un technicien, notre expert pour bénéficier d'un accompagnement sur mesure.</p>
+        </div>
+    </section>
+
+    <section class="benefits-section">
+        <div class="container">
+            <h2 class="section-title">POURQUOI CHOISIR EGCOM-PROJETS ?</h2>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="icon">🏗️</div>
+                    <h3>Expertise Locale</h3>
+                    <p>Une connaissance approfondie du marché immobilier africain et des réglementations locales.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="icon">🤝</div>
+                    <h3>Accompagnement Personnalisé</h3>
+                    <p>Un suivi sur mesure de votre projet, de la conception à la réalisation.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="icon">💼</div>
+                    <h3>Gestion Complète</h3>
+                    <p>Nous gérons tous les aspects de votre projet immobilier à distance.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="icon">🔒</div>
+                    <h3>Sécurité & Transparence</h3>
+                    <p>Des processus transparents et sécurisés pour votre tranquillité d'esprit.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="icon">📊</div>
+                    <h3>Suivi en Temps Réel</h3>
+                    <p>Restez informé de l'avancement de votre projet où que vous soyez.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="icon">⭐</div>
+                    <h3>Qualité Garantie</h3>
+                    <p>Des standards de qualité élevés pour des constructions durables.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="booking-section">
+        <div class="container">
+            <div class="booking-container">
+                <div class="booking-intro">
+                    <h2>RÉSERVEZ VOTRE RENDEZ-VOUS</h2>
+                    <p>Planifiez un appel téléphonique avec notre expert pour discuter de votre projet immobilier en Afrique.</p>
+                </div>
+
+                <div class="info-box">
+                    <h4>📞 Déroulement de l'appel :</h4>
+                    <ul>
+                        <li>Analyse de vos besoins et objectifs</li>
+                        <li>Présentation des opportunités disponibles</li>
+                        <li>Estimation budgétaire préliminaire</li>
+                        <li>Plan d'action personnalisé</li>
+                        <li>Réponses à toutes vos questions</li>
+                    </ul>
+                </div>
+
+                <form id="bookingForm" class="booking-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="nom">Nom complet *</label>
+                            <input type="text" id="nom" name="nom" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="telephone">Téléphone *</label>
+                            <input type="tel" id="telephone" name="telephone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="pays">Pays de résidence *</label>
+                            <input type="text" id="pays" name="pays" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="date">Date souhaitée *</label>
+                        <input type="date" id="date" name="date" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Créneau horaire * (Heure de Conakry - GMT)</label>
+                        <div class="time-slots" id="timeSlots">
+                            <div class="time-slot" data-time="09:00">09:00</div>
+                            <div class="time-slot" data-time="10:00">10:00</div>
+                            <div class="time-slot" data-time="11:00">11:00</div>
+                            <div class="time-slot" data-time="14:00">14:00</div>
+                            <div class="time-slot" data-time="15:00">15:00</div>
+                            <div class="time-slot" data-time="16:00">16:00</div>
+                            <div class="time-slot" data-time="17:00">17:00</div>
+                        </div>
+                        <input type="hidden" id="selectedTime" name="selectedTime" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="projet">Type de projet *</label>
+                        <select id="projet" name="projet" required>
+                            <option value="">-- Sélectionnez --</option>
+                            <option value="Construction neuve">Construction neuve</option>
+                            <option value="Rénovation">Rénovation</option>
+                            <option value="Achat terrain">Achat de terrain</option>
+                            <option value="Investissement locatif">Investissement locatif</option>
+                            <option value="Autre">Autre</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Décrivez brièvement votre projet</label>
+                        <textarea id="message" name="message" rows="4" placeholder="Parlez-nous de votre projet immobilier..."></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn" id="submitBtn">RÉSERVER MON RENDEZ-VOUS</button>
+
+                    <div id="bookingMessage" class="booking-message"></div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3>EGCOM</h3>
+                    <p>Construction, rénovation et management de projets BTP de qualité depuis 2023.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Liens rapides</h4>
+                    <ul>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="diaspora.html">Diaspora</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li>Email: egcom.projets23@gmail.com</li>
+                        <li>Tél: +224 625 482 747</li>
+                        <li>Adresse: Matoto, Immeuble ECOBANK, Conakry, Guinée</li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Suivez-nous</h4>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook">Facebook</a>
+                        <a href="#" aria-label="LinkedIn">LinkedIn</a>
+                        <a href="#" aria-label="Twitter">Twitter</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 EGCOM. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+        // CONFIGURATION EMAILJS
+        const EMAILJS_PUBLIC_KEY = '9_7Qz6ZS3bPq2aw9M';
+        const EMAILJS_SERVICE_ID = 'service_weszu8y';
+        const EMAILJS_TEMPLATE_ID = 'template_b0qrauh';
+
+        // Initialiser EmailJS
+        emailjs.init(EMAILJS_PUBLIC_KEY);
+
+        // Gestion de la sélection de créneau horaire
+        const timeSlots = document.querySelectorAll('.time-slot');
+        const selectedTimeInput = document.getElementById('selectedTime');
+
+        timeSlots.forEach(slot => {
+            slot.addEventListener('click', function() {
+                if (!this.classList.contains('unavailable')) {
+                    // Retirer la sélection des autres créneaux
+                    timeSlots.forEach(s => s.classList.remove('selected'));
+                    // Ajouter la sélection au créneau cliqué
+                    this.classList.add('selected');
+                    selectedTimeInput.value = this.dataset.time;
+                }
+            });
+        });
+
+        // Gestion de la date minimum (aujourd'hui)
+        const dateInput = document.getElementById('date');
+        const today = new Date().toISOString().split('T')[0];
+        dateInput.setAttribute('min', today);
+
+        // Gestion du formulaire
+        document.getElementById('bookingForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const submitBtn = document.getElementById('submitBtn');
+            const bookingMessage = document.getElementById('bookingMessage');
+
+            // Vérifier qu'un créneau a été sélectionné
+            if (!selectedTimeInput.value) {
+                bookingMessage.className = 'booking-message error';
+                bookingMessage.textContent = 'Veuillez sélectionner un créneau horaire.';
+                bookingMessage.style.display = 'block';
+                return;
+            }
+
+            // Désactiver le bouton pendant l'envoi
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'ENVOI EN COURS...';
+            bookingMessage.style.display = 'none';
+
+            // Préparer les données
+            const formData = {
+                nom: document.getElementById('nom').value,
+                email: document.getElementById('email').value,
+                telephone: document.getElementById('telephone').value,
+                pays: document.getElementById('pays').value,
+                date: document.getElementById('date').value,
+                heure: selectedTimeInput.value,
+                projet: document.getElementById('projet').value,
+                message: document.getElementById('message').value
+            };
+
+            const emailMessage = `NOUVELLE RÉSERVATION - DIASPORA AFRICAINE
+
+Nom: ${formData.nom}
+Email: ${formData.email}
+Téléphone: ${formData.telephone}
+Pays de résidence: ${formData.pays}
+
+RENDEZ-VOUS DEMANDÉ:
+Date: ${formData.date}
+Heure: ${formData.heure} (GMT - Conakry)
+
+Type de projet: ${formData.projet}
+
+Description du projet:
+${formData.message || 'Non spécifié'}
+
+---
+Cette réservation nécessite une confirmation de votre part.`;
+
+            try {
+                // Envoyer l'email de notification à EGCOM
+                await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        service_id: EMAILJS_SERVICE_ID,
+                        template_id: EMAILJS_TEMPLATE_ID,
+                        user_id: EMAILJS_PUBLIC_KEY,
+                        template_params: {
+                            to_email: 'egcom.projets23@gmail.com',
+                            name: formData.nom,
+                            email: formData.email,
+                            phone: formData.telephone,
+                            projectType: 'Réservation Rendez-vous Diaspora',
+                            city: formData.pays,
+                            budget: `${formData.date} à ${formData.heure}`,
+                            message: emailMessage
+                        }
+                    })
+                });
+
+                console.log('Notification envoyée à EGCOM avec succès!');
+
+                // Envoyer l'email de confirmation au client
+                const confirmationMessage = `Bonjour ${formData.nom},
+
+Merci d'avoir réservé un rendez-vous avec EGCOM-PROJETS !
+
+Nous avons bien reçu votre demande de rendez-vous téléphonique pour le ${formData.date} à ${formData.heure} (heure de Conakry - GMT).
+
+Notre équipe va examiner votre demande et vous contactera dans les plus brefs délais pour confirmer ce rendez-vous.
+
+Récapitulatif de votre réservation :
+- Date : ${formData.date}
+- Heure : ${formData.heure} (GMT - Conakry)
+- Type de projet : ${formData.projet}
+- Téléphone : ${formData.telephone}
+
+Chez EGCOM-PROJETS, nous sommes convaincus que chaque projet incarne une ambition, une vision et une promesse d'avenir. Nous sommes impatients d'échanger avec vous sur votre projet immobilier en Afrique.
+
+Cordialement,
+L'équipe EGCOM-PROJETS
+Email : egcom.projets23@gmail.com
+Tél : +224 625 482 747`;
+
+                await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        service_id: EMAILJS_SERVICE_ID,
+                        template_id: EMAILJS_TEMPLATE_ID,
+                        user_id: EMAILJS_PUBLIC_KEY,
+                        template_params: {
+                            to_email: formData.email,
+                            name: 'EGCOM-PROJETS',
+                            email: 'egcom.projets23@gmail.com',
+                            phone: '',
+                            projectType: '',
+                            city: '',
+                            budget: '',
+                            message: confirmationMessage
+                        }
+                    })
+                });
+
+                console.log('Email de confirmation envoyé au client avec succès!');
+
+                // Afficher message de succès
+                bookingMessage.className = 'booking-message success';
+                bookingMessage.innerHTML = '<strong>✓ Rendez-vous réservé avec succès !</strong><br>Vous avez reçu un email de confirmation. Notre équipe vous contactera rapidement pour confirmer votre rendez-vous.';
+                bookingMessage.style.display = 'block';
+
+                // Réinitialiser le formulaire
+                this.reset();
+                timeSlots.forEach(s => s.classList.remove('selected'));
+                selectedTimeInput.value = '';
+
+                // Faire défiler jusqu'au message
+                bookingMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+            } catch (error) {
+                console.error('Erreur lors de l\'envoi:', error);
+                bookingMessage.className = 'booking-message error';
+                bookingMessage.textContent = '✗ Erreur lors de la réservation. Veuillez réessayer ou nous contacter directement par email.';
+                bookingMessage.style.display = 'block';
+            } finally {
+                // Réactiver le bouton
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'RÉSERVER MON RENDEZ-VOUS';
+            }
+        });
+    </script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
