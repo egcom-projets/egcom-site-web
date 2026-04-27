@@ -81,11 +81,12 @@ a {
 }
 
 .navbar {
-    background: linear-gradient(135deg, #0033CC 0%, #0066FF 100%);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    background: linear-gradient(90deg, #003366 0%, #0052A3 50%, #003366 100%);
+    box-shadow: 0 4px 20px rgba(0, 51, 102, 0.3);
     position: sticky;
     top: 0;
     z-index: 1000;
+    border-bottom: 3px solid #DC143C;
 }
 
 .nav-wrapper {
