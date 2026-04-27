@@ -764,6 +764,7 @@ a {
 /* CEO Message */
 .ceo-message-section {
     padding: 80px 0;
+    background: white;
 }
 
 .ceo-intro {
@@ -772,17 +773,32 @@ a {
     gap: 60px;
     align-items: center;
     margin-bottom: 60px;
+    background: white;
+    padding: 40px;
+    border: 3px solid #003366;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 51, 102, 0.15),
+                inset 0 2px 4px rgba(255, 255, 255, 0.8);
+}
+
+.ceo-photo {
+    position: relative;
 }
 
 .ceo-photo img {
-    border-radius: 8px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2),
+                inset 0 -2px 8px rgba(0, 0, 0, 0.1);
+    border: 4px solid white;
+    outline: 2px solid #003366;
 }
 
 .ceo-info h2 {
     font-size: 32px;
     color: var(--primary-blue);
     margin-bottom: 10px;
+    text-shadow: 0 2px 4px rgba(0, 51, 102, 0.1);
 }
 
 .ceo-title {
@@ -797,16 +813,42 @@ a {
     font-style: italic;
     color: var(--text-gray);
     line-height: 1.8;
+    padding: 20px;
+    background: linear-gradient(145deg, #f8f9fa 0%, #e9ecef 100%);
+    border-left: 4px solid #DC143C;
+    border-radius: 8px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .message-block {
-    margin-bottom: 40px;
+    margin-bottom: 30px;
+    background: white;
+    padding: 30px;
+    border: 2px solid #003366;
+    border-radius: 10px;
+    box-shadow: 0 6px 16px rgba(0, 51, 102, 0.1),
+                inset 0 1px 2px rgba(255, 255, 255, 0.8),
+                inset 0 -1px 2px rgba(0, 0, 0, 0.05);
+    position: relative;
+    overflow: hidden;
+}
+
+.message-block::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 6px;
+    height: 100%;
+    background: linear-gradient(180deg, #DC143C 0%, #003366 100%);
 }
 
 .message-block h3 {
     font-size: 24px;
     color: var(--primary-blue);
     margin-bottom: 15px;
+    margin-left: 20px;
+    text-shadow: 0 1px 2px rgba(0, 51, 102, 0.1);
 }
 
 .message-block p {
@@ -814,18 +856,25 @@ a {
     color: var(--text-gray);
     line-height: 1.8;
     margin-bottom: 15px;
+    margin-left: 20px;
 }
 
 .ceo-signature {
     margin-top: 60px;
-    padding-top: 40px;
-    border-top: 2px solid var(--border-color);
+    padding: 30px;
+    background: linear-gradient(145deg, #f8f9fa 0%, #ffffff 100%);
+    border: 2px solid #003366;
+    border-radius: 10px;
+    box-shadow: 0 6px 16px rgba(0, 51, 102, 0.1),
+                inset 0 1px 2px rgba(255, 255, 255, 0.8);
+    text-align: right;
 }
 
 .signature-text {
     font-size: 16px;
     color: var(--text-gray);
     margin-bottom: 10px;
+    font-style: italic;
 }
 
 .signature-name {
@@ -833,11 +882,13 @@ a {
     font-weight: 700;
     color: var(--primary-blue);
     margin-bottom: 5px;
+    text-shadow: 0 1px 2px rgba(0, 51, 102, 0.1);
 }
 
 .signature-title {
     font-size: 16px;
     color: var(--primary-red);
+    font-weight: 600;
 }
 
 /* Values Section */
