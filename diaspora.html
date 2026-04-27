@@ -592,7 +592,24 @@ Cette réservation nécessite une confirmation de votre part.`;
                 console.log('Notification envoyée à EGCOM avec succès!');
 
                 // Envoyer l'email de confirmation au client
-                const confirmationMessage = `Bonjour ${formData.nom},
+                await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        service_id: EMAILJS_SERVICE_ID,
+                        template_id: EMAILJS_TEMPLATE_ID,
+                        user_id: EMAILJS_PUBLIC_KEY,
+                        template_params: {
+                            to_email: formData.email,
+                            name: formData.nom,
+                            email: 'egcom.projets23@gmail.com',
+                            phone: '',
+                            projectType: '',
+                            city: '',
+                            budget: '',
+                            message: `Bonjour ${formData.nom},
 
 Merci d'avoir réservé un rendez-vous avec EGCOM-PROJETS !
 
@@ -611,26 +628,7 @@ Chez EGCOM-PROJETS, nous sommes convaincus que chaque projet incarne une ambitio
 Cordialement,
 L'équipe EGCOM-PROJETS
 Email : egcom.projets23@gmail.com
-Tél : +224 625 482 747`;
-
-                await fetch('https://api.emailjs.com/api/v1.0/email/send', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        service_id: EMAILJS_SERVICE_ID,
-                        template_id: EMAILJS_TEMPLATE_ID,
-                        user_id: EMAILJS_PUBLIC_KEY,
-                        template_params: {
-                            to_email: formData.email,
-                            name: 'EGCOM-PROJETS',
-                            email: 'egcom.projets23@gmail.com',
-                            phone: '',
-                            projectType: '',
-                            city: '',
-                            budget: '',
-                            message: confirmationMessage
+Tél : +224 625 482 747`
                         }
                     })
                 });

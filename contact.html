@@ -278,19 +278,6 @@
                 console.log('Email envoyé à EGCOM avec succès!');
                 
                 // 2. Envoyer l'email de confirmation au client
-                const confirmationMessage = `Bonjour Monsieur/Madame,
-
-Nous vous remercions pour l'intérêt que vous portez à EGCOMP-PROJETS.
-
-Votre demande a bien été reçue et notre équipe d'ingénierie vous contactera dans les plus brefs délais afin de mieux comprendre votre projet et d'en étudier les spécificités.
-
-Chez EGCOMP-PROJETS, nous considérons chaque projet comme l'expression d'une ambition, d'une vision et d'un engagement tourné vers l'avenir. Cette philosophie guide l'ensemble de nos interventions, qu'il s'agisse de management de projets BTP, de réalisation d'infrastructures durables ou d'accompagnement stratégique.
-
-Nous nous réjouissons de collaborer avec vous.
-
-Cordialement,
-L'équipe EGCOMP-PROJETS`;
-
                 await fetch('https://api.emailjs.com/api/v1.0/email/send', {
                     method: 'POST',
                     headers: {
@@ -302,13 +289,26 @@ L'équipe EGCOMP-PROJETS`;
                         user_id: EMAILJS_PUBLIC_KEY,
                         template_params: {
                             to_email: templateParams.email,
-                            name: 'EGCOMP-PROJETS',
+                            name: templateParams.name,
                             email: 'egcom.projets23@gmail.com',
                             phone: '',
                             projectType: '',
                             city: '',
                             budget: '',
-                            message: confirmationMessage
+                            message: `Bonjour ${templateParams.name},
+
+Merci d'avoir réservé un rendez-vous avec EGCOMP-PROJETS !
+
+Nous avons bien reçu votre demande de contact. Notre équipe d'ingénierie vous contactera dans les plus brefs délais afin de mieux comprendre votre projet et d'en étudier les spécificités.
+
+Chez EGCOMP-PROJETS, nous considérons chaque projet comme l'expression d'une ambition, d'une vision et d'un engagement tourné vers l'avenir. Cette philosophie guide l'ensemble de nos interventions, qu'il s'agisse de management de projets BTP, de réalisation d'infrastructures durables ou d'accompagnement stratégique.
+
+Nous nous réjouissons de collaborer avec vous.
+
+Cordialement,
+L'équipe EGCOMP-PROJETS
+Email : egcom.projets23@gmail.com
+Tél : +224 625 482 747`
                         }
                     })
                 });
