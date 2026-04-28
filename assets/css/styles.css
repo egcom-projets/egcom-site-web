@@ -389,6 +389,7 @@ a {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s, box-shadow 0.3s;
     cursor: pointer;
+    border: none;
 }
 
 .service-card:hover {
@@ -402,12 +403,18 @@ a {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--primary-blue);
+    background-color: #003366;
     color: white;
-    font-size: 28px;
-    font-weight: 700;
     text-align: center;
     padding: 20px;
+    border: none;
+}
+
+.service-image h2 {
+    font-size: 28px;
+    font-weight: 700;
+    margin: 0;
+    color: white;
 }
 
 .service-image img {
