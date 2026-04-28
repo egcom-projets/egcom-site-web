@@ -339,7 +339,7 @@
                 // Upload CV
                 const cvFileName = `cv_${Date.now()}_${cvFile.name}`;
                 const { data: cvData, error: cvError } = await supabaseClient.storage
-                    .from('candidatures')
+                    .from('Candidature')
                     .upload(cvFileName, cvFile);
                 
                 if (cvError) throw cvError;
@@ -349,7 +349,7 @@
                 if (lettreFile) {
                     lettreFileName = `lettre_${Date.now()}_${lettreFile.name}`;
                     const { data: lettreData, error: lettreError } = await supabaseClient.storage
-                        .from('candidatures')
+                        .from('Candidature')
                         .upload(lettreFileName, lettreFile);
                     
                     if (lettreError) throw lettreError;
