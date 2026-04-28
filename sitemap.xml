@@ -9,32 +9,20 @@
   <url>
     <loc>https://egcom-projets.github.io/egcom-site-web/services.html</loc>
     <lastmod>2026-04-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://egcom-projets.github.io/egcom-site-web/mots-du-pdg.html</loc>
     <lastmod>2026-04-28</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://egcom-projets.github.io/egcom-site-web/references.html</loc>
     <lastmod>2026-04-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://egcom-projets.github.io/egcom-site-web/formation.html</loc>
-    <lastmod>2026-04-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://egcom-projets.github.io/egcom-site-web/carrieres.html</loc>
-    <lastmod>2026-04-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://egcom-projets.github.io/egcom-site-web/realisations.html</loc>
@@ -43,10 +31,16 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://egcom-projets.github.io/egcom-site-web/a-propos.html</loc>
+    <loc>https://egcom-projets.github.io/egcom-site-web/carrieres.html</loc>
     <lastmod>2026-04-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://egcom-projets.github.io/egcom-site-web/a-propos.html</loc>
+    <lastmod>2026-04-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://egcom-projets.github.io/egcom-site-web/contact.html</loc>
