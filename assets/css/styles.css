@@ -1571,15 +1571,25 @@ a {
     .btn-primary {
         width: 100%;
         text-align: center;
-        margin: 10px 0;
-        padding: 12px 20px;
-        font-size: 14px;
+        margin: 8px 0;
+        padding: 10px 15px;
+        font-size: 12px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     .language-switcher {
         width: 100%;
         justify-content: center;
-        margin-top: 10px;
+        margin-top: 8px;
+        gap: 8px;
+    }
+
+    .lang-btn {
+        padding: 8px 16px;
+        font-size: 12px;
+        min-width: 50px;
     }
 
     .mobile-menu-toggle {
