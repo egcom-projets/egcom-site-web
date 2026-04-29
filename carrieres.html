@@ -32,6 +32,7 @@
                         <li><a href="realisations.html" class="nav-link">RÉALISATIONS</a></li>
                         <li><a href="a-propos.html" class="nav-link">À PROPOS</a></li>
                         <li><a href="diaspora.html" class="nav-link">DIASPORA</a></li>
+                        <li id="adminLink" style="display: none;"><a href="admin-candidatures.html" class="nav-link" style="color: #DC143C;">🔐 ADMIN</a></li>
                         <li><a href="contact.html" class="nav-link">CONTACT</a></li>
                     </ul>
                     
@@ -479,6 +480,35 @@ Tél : +224 625 482 747`;
                 submitButton.textContent = 'ENVOYER MA CANDIDATURE';
             }
         });
+    </script>
+    <script>
+        // Système d'activation du lien ADMIN (triple-clic sur le logo)
+        let clickCount = 0;
+        let clickTimer = null;
+        
+        document.querySelector('.logo')?.addEventListener('click', function() {
+            clickCount++;
+            
+            if (clickTimer) clearTimeout(clickTimer);
+            
+            if (clickCount === 3) {
+                const adminLink = document.getElementById('adminLink');
+                if (adminLink) {
+                    adminLink.style.display = 'block';
+                    sessionStorage.setItem('adminVisible', 'true');
+                }
+                clickCount = 0;
+            }
+            
+            clickTimer = setTimeout(() => {
+                clickCount = 0;
+            }, 500);
+        });
+        
+        if (sessionStorage.getItem('adminVisible') === 'true') {
+            const adminLink = document.getElementById('adminLink');
+            if (adminLink) adminLink.style.display = 'block';
+        }
     </script>
 </body>
 </html>
