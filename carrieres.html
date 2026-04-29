@@ -382,7 +382,49 @@
                 
                 if (error) throw error;
                 
-                // Envoyer un email de confirmation au candidat
+                // 1. Envoyer un email de notification à EGCOM
+                const notificationEGCOM = `Nouvelle candidature reçue !
+
+Nom : ${candidatureData.nom}
+Email : ${candidatureData.email}
+Téléphone : ${candidatureData.telephone}
+Pays : ${candidatureData.pays}
+Poste : ${candidatureData.poste}
+Expérience : ${candidatureData.experience}
+
+Message :
+${candidatureData.message}
+
+Les fichiers CV et lettre de motivation sont disponibles dans votre espace admin :
+https://egcom-projets.github.io/egcom-site-web/admin-candidatures.html`;
+
+                try {
+                    await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            service_id: EMAILJS_SERVICE_ID,
+                            template_id: EMAILJS_TEMPLATE_ID,
+                            user_id: EMAILJS_PUBLIC_KEY,
+                            template_params: {
+                                to_email: 'egcom.projets23@gmail.com',
+                                name: candidatureData.nom,
+                                email: candidatureData.email,
+                                phone: candidatureData.telephone,
+                                projectType: candidatureData.poste,
+                                city: candidatureData.pays,
+                                budget: candidatureData.experience,
+                                message: notificationEGCOM
+                            }
+                        })
+                    });
+                } catch (emailError) {
+                    console.error('Erreur envoi email EGCOM:', emailError);
+                }
+                
+                // 2. Envoyer un email de confirmation au candidat
                 const confirmationMessage = `Bonjour ${candidatureData.nom},
 
 Merci d'avoir postulé chez EGCOM-PROJETS !
@@ -421,8 +463,7 @@ Tél : +224 625 482 747`;
                         })
                     });
                 } catch (emailError) {
-                    console.error('Erreur envoi email:', emailError);
-                    // Ne pas bloquer si l'email échoue
+                    console.error('Erreur envoi email candidat:', emailError);
                 }
                 
                 messageDiv.className = 'form-message success';
