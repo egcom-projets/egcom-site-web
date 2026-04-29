@@ -546,5 +546,29 @@
             }
         });
     </script>
+    <script>
+        // Système d'activation du lien ADMIN (Ctrl+Shift+A)
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.shiftKey && e.key === 'A') {
+                const adminLink = document.getElementById('adminLink');
+                if (adminLink) {
+                    if (adminLink.style.display === 'none') {
+                        adminLink.style.display = 'block';
+                        sessionStorage.setItem('adminVisible', 'true');
+                        alert('🔐 Mode Admin activé');
+                    } else {
+                        adminLink.style.display = 'none';
+                        sessionStorage.removeItem('adminVisible');
+                        alert('Mode Admin désactivé');
+                    }
+                }
+            }
+        });
+        
+        if (sessionStorage.getItem('adminVisible') === 'true') {
+            const adminLink = document.getElementById('adminLink');
+            if (adminLink) adminLink.style.display = 'block';
+        }
+    </script>
 </body>
 </html>
