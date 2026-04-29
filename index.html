@@ -29,6 +29,23 @@
     <script src="assets/js/analytics.js"></script>
 </head>
 <body>
+    <!-- Bande supérieure -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-content">
+                <div class="company-name-animated" id="companyName"></div>
+                <div class="language-flags">
+                    <button class="flag-btn active" data-lang="fr" title="Français">
+                        <img src="https://flagcdn.com/w40/fr.png" alt="Français" width="24" height="18">
+                    </button>
+                    <button class="flag-btn" data-lang="en" title="English">
+                        <img src="https://flagcdn.com/w40/gb.png" alt="English" width="24" height="18">
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <header class="header" id="header">
         <nav class="navbar">
             <div class="container">
@@ -54,11 +71,6 @@
                     </ul>
                     
                     <a href="contact.html" class="btn-primary" data-translate="CONTACTER EGCOM-PROJETS">CONTACTER EGCOM-PROJETS</a>
-                    
-                    <div class="language-switcher">
-                        <button class="lang-btn active" data-lang="fr">FR</button>
-                        <button class="lang-btn" data-lang="en">EN</button>
-                    </div>
                     
                     <button class="mobile-menu-toggle" id="mobileMenuToggle">
                         <span></span>
@@ -374,10 +386,42 @@
             });
         });
 
+        // Gestionnaire pour les drapeaux dans la top bar
+        document.querySelectorAll('.flag-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const lang = this.getAttribute('data-lang');
+                translatePage(lang);
+                
+                // Mettre à jour l'état actif des drapeaux
+                document.querySelectorAll('.flag-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Animation du nom de l'entreprise lettre par lettre
+        function animateCompanyName() {
+            const companyName = 'EGCOM-PROJETS';
+            const container = document.getElementById('companyName');
+            container.innerHTML = '';
+            
+            companyName.split('').forEach((letter, index) => {
+                const span = document.createElement('span');
+                span.textContent = letter;
+                span.style.animationDelay = `${index * 0.1}s`;
+                container.appendChild(span);
+            });
+        }
+
+        // Lancer l'animation au chargement
+        animateCompanyName();
+
         // Charger la langue sauvegardée au chargement de la page
         const savedLang = localStorage.getItem('language') || 'fr';
         if (savedLang === 'en') {
             translatePage('en');
+            document.querySelectorAll('.flag-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.getAttribute('data-lang') === 'en');
+            });
         }
     </script>
     <script>

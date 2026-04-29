@@ -16,6 +16,87 @@
     --border-color: #E5E7EB;
 }
 
+/* Top Bar */
+.top-bar {
+    background: linear-gradient(135deg, #0033CC 0%, #001f7a 100%);
+    color: white;
+    padding: 10px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1001;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.top-bar-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.company-name-animated {
+    font-family: 'Arial', 'Helvetica', sans-serif;
+    font-size: 18px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    color: white;
+    text-transform: uppercase;
+}
+
+.company-name-animated span {
+    display: inline-block;
+    opacity: 0;
+    animation: fadeInLetter 0.3s forwards;
+}
+
+@keyframes fadeInLetter {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.language-flags {
+    display: flex;
+    gap: 10px;
+}
+
+.flag-btn {
+    background: transparent;
+    border: 2px solid transparent;
+    padding: 4px 8px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+}
+
+.flag-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.flag-btn.active {
+    border-color: white;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.flag-btn img {
+    display: block;
+    border-radius: 2px;
+}
+
+/* Ajuster le header pour compenser la top bar */
+.header {
+    margin-top: 45px;
+}
+
 body {
     font-family: 'Georgia', 'Times New Roman', serif;
     color: var(--text-dark);
