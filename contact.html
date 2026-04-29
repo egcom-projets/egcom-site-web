@@ -338,27 +338,22 @@ Tél : +224 625 482 747`;
         });
     </script>
     <script>
-        // Système d'activation du lien ADMIN (triple-clic sur le logo)
-        let clickCount = 0;
-        let clickTimer = null;
-        
-        document.querySelector('.logo')?.addEventListener('click', function() {
-            clickCount++;
-            
-            if (clickTimer) clearTimeout(clickTimer);
-            
-            if (clickCount === 3) {
+        // Système d'activation du lien ADMIN (Ctrl+Shift+A)
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.shiftKey && e.key === 'A') {
                 const adminLink = document.getElementById('adminLink');
                 if (adminLink) {
-                    adminLink.style.display = 'block';
-                    sessionStorage.setItem('adminVisible', 'true');
+                    if (adminLink.style.display === 'none') {
+                        adminLink.style.display = 'block';
+                        sessionStorage.setItem('adminVisible', 'true');
+                        alert('🔐 Mode Admin activé');
+                    } else {
+                        adminLink.style.display = 'none';
+                        sessionStorage.removeItem('adminVisible');
+                        alert('Mode Admin désactivé');
+                    }
                 }
-                clickCount = 0;
             }
-            
-            clickTimer = setTimeout(() => {
-                clickCount = 0;
-            }, 500);
         });
         
         if (sessionStorage.getItem('adminVisible') === 'true') {
