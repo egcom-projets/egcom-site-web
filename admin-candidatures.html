@@ -313,30 +313,22 @@
 
         async function downloadFile(fileName) {
             try {
+                console.log('Tentative de téléchargement:', fileName);
+                
                 // Obtenir l'URL publique du fichier
                 const { data } = supabaseClient.storage
                     .from('Candidature')
                     .getPublicUrl(fileName);
 
+                console.log('URL générée:', data);
+
                 if (!data || !data.publicUrl) {
                     throw new Error('Impossible de générer l\'URL du fichier');
                 }
 
-                // Télécharger le fichier via fetch
-                const response = await fetch(data.publicUrl);
-                if (!response.ok) {
-                    throw new Error('Fichier introuvable');
-                }
-
-                const blob = await response.blob();
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = fileName.split('/').pop(); // Extraire le nom du fichier
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                URL.revokeObjectURL(url);
+                // Ouvrir directement l'URL dans un nouvel onglet pour forcer le téléchargement
+                window.open(data.publicUrl, '_blank');
+                
             } catch (error) {
                 console.error('Erreur téléchargement:', error);
                 alert('Erreur lors du téléchargement: ' + error.message);
