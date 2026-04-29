@@ -269,11 +269,18 @@
 
     <script src="assets/js/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script>
         // Initialiser Supabase
         const SUPABASE_URL = 'https://bdalhwzrbvnnibtsqsni.supabase.co';
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJkYWxod3pyYnZubmlidHNxc25pIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU5MTczMjUsImV4cCI6MjA5MTQ5MzMyNX0.Su_WowiZbRxhx_MEdoVvHfLjvISduLXrOpsBxaykhjw';
         const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        // Configuration EmailJS
+        const EMAILJS_PUBLIC_KEY = '9_7Qz6ZS3bPq2aw9M';
+        const EMAILJS_SERVICE_ID = 'service_weszu8y';
+        const EMAILJS_TEMPLATE_ID = 'template_b0qrauh';
+        emailjs.init(EMAILJS_PUBLIC_KEY);
 
         // Charger les offres d'emploi depuis Supabase
         async function loadOffres() {
@@ -375,8 +382,51 @@
                 
                 if (error) throw error;
                 
+                // Envoyer un email de confirmation au candidat
+                const confirmationMessage = `Bonjour ${candidatureData.nom},
+
+Merci d'avoir postulé chez EGCOM-PROJETS !
+
+Nous avons bien reçu votre candidature pour le poste de ${candidatureData.poste}. Notre équipe des ressources humaines va étudier votre profil avec attention.
+
+Nous vous contacterons dans les plus brefs délais si votre profil correspond à nos besoins actuels.
+
+Nous vous remercions pour l'intérêt que vous portez à EGCOM-PROJETS.
+
+Cordialement,
+L'équipe RH EGCOM-PROJETS
+Email : egcom.projets23@gmail.com
+Tél : +224 625 482 747`;
+
+                try {
+                    await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            service_id: EMAILJS_SERVICE_ID,
+                            template_id: EMAILJS_TEMPLATE_ID,
+                            user_id: EMAILJS_PUBLIC_KEY,
+                            template_params: {
+                                to_email: candidatureData.email,
+                                name: 'EGCOM-PROJETS',
+                                email: 'egcom.projets23@gmail.com',
+                                phone: '+224 625 482 747',
+                                projectType: 'Confirmation de candidature',
+                                city: '',
+                                budget: '',
+                                message: confirmationMessage
+                            }
+                        })
+                    });
+                } catch (emailError) {
+                    console.error('Erreur envoi email:', emailError);
+                    // Ne pas bloquer si l'email échoue
+                }
+                
                 messageDiv.className = 'form-message success';
-                messageDiv.textContent = 'Votre candidature a été envoyée avec succès ! Nous vous contacterons dans les plus brefs délais.';
+                messageDiv.textContent = 'Votre candidature a été envoyée avec succès ! Un email de confirmation vous a été envoyé.';
                 this.reset();
                 
             } catch (error) {
