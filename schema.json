@@ -1,0 +1,35 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "EGCOM-PROJETS",
+  "url": "https://egcom-projets.com",
+  "logo": "https://egcom-projets.com/Logo%20version%20nouvelle/Logo%2026%2004%2026.png",
+  "description": "Entreprise leader en BTP en Guinée. Construction, rénovation, management de projets, conseil et expertise.",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Conakry",
+    "addressCountry": "GN"
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+224-XXX-XXX-XXX",
+    "contactType": "Customer Service",
+    "email": "egcom.projets23@gmail.com",
+    "availableLanguage": ["French", "English"]
+  },
+  "sameAs": [
+    "https://www.facebook.com/egcomprojets",
+    "https://www.linkedin.com/company/egcom-projets"
+  ],
+  "areaServed": {
+    "@type": "Country",
+    "name": "Guinea"
+  },
+  "serviceType": [
+    "Construction",
+    "Rénovation",
+    "Management de projets BTP",
+    "Conseil et expertise BTP",
+    "Formation professionnelle"
+  ]
+}
