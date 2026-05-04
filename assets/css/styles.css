@@ -33,6 +33,40 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 20px;
+}
+
+/* Tagline dans la top-bar */
+.top-bar-tagline {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.top-bar-tagline .tagline-item {
+    color: white;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+}
+
+.top-bar-tagline .tagline-item:hover {
+    color: #FFD700;
+    transform: scale(1.05);
+}
+
+.top-bar-tagline .tagline-separator {
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: bold;
+}
+
+/* Responsive pour mobile */
+@media (max-width: 768px) {
+    .top-bar-tagline {
+        display: none;
+    }
 }
 
 .company-name-animated {
@@ -209,42 +243,6 @@ a {
     font-size: 28px;
     color: var(--primary-blue);
     font-weight: 700;
-}
-
-/* Tagline à côté du logo */
-.logo-tagline {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-left: 15px;
-    padding-left: 15px;
-    border-left: 2px solid #003366;
-}
-
-.tagline-item {
-    font-size: 13px;
-    font-weight: 600;
-    color: #003366;
-    white-space: nowrap;
-    transition: all 0.3s ease;
-}
-
-.tagline-item:hover {
-    color: #DC143C;
-    transform: scale(1.05);
-}
-
-.tagline-separator {
-    color: #003366;
-    font-weight: bold;
-    opacity: 0.5;
-}
-
-/* Responsive pour mobile */
-@media (max-width: 768px) {
-    .logo-tagline {
-        display: none;
-    }
 }
 
 .nav-menu {
