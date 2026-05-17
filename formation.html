@@ -8,7 +8,162 @@
     <link rel="stylesheet" href="assets/css/styles.css">
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-WH05VV1KFP"></script>
-    <script src="assets/js/analytics.js"></script>
+    <script defer src="assets/js/analytics.js"></script>
+    <style>
+        .formations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .formation-card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            border: 2px solid transparent;
+            position: relative;
+        }
+
+        .formation-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(0, 51, 102, 0.15);
+            border-color: #003366;
+        }
+
+        .formation-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .formation-icon-circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #003366, #0066CC);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+        }
+
+        .formation-badge {
+            background: #DC143C;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .formation-badge.new {
+            background: #28a745;
+        }
+
+        .formation-card h3 {
+            font-size: 20px;
+            color: #003366;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .formation-desc {
+            color: #555;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .formation-details {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 25px 0;
+        }
+
+        .formation-details li {
+            padding: 6px 0;
+            color: #444;
+            font-size: 13px;
+            border-bottom: 1px solid #f0f0f0;
+            position: relative;
+            padding-left: 22px;
+        }
+
+        .formation-details li::before {
+            content: '✓';
+            color: #0066CC;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        .formation-details li:last-child {
+            border-bottom: none;
+        }
+
+        .formation-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 15px;
+            border-top: 2px solid #f0f4ff;
+        }
+
+        .formation-duration {
+            color: #666;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .formation-cta {
+            color: #DC143C;
+            font-weight: 700;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .formation-card:hover .formation-cta {
+            color: #003366;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-header h2 {
+            font-size: 32px;
+            color: #003366;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .section-header p {
+            color: #666;
+            font-size: 16px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 768px) {
+            .formations-grid {
+                grid-template-columns: 1fr;
+                padding: 0 15px;
+            }
+
+            .formation-card {
+                padding: 25px;
+            }
+        }
+    </style>
 </head>
 <body>
     <header class="header" id="header">
@@ -22,16 +177,17 @@
                     </div>
                     
                     <ul class="nav-menu" id="navMenu">
-                        <li><a href="index.html" class="nav-link">ACCUEIL</a></li>
-                        <li><a href="services.html" class="nav-link">SERVICES</a></li>
-                        <li><a href="mots-du-pdg.html" class="nav-link">MOT DU PDG</a></li>
-                        <li><a href="references.html" class="nav-link">RÉFÉRENCES</a></li>
-                        <li><a href="formation.html" class="nav-link active">FORMATION</a></li>
-                        <li><a href="carrieres.html" class="nav-link">CARRIÈRES</a></li>
-                        <li><a href="realisations.html" class="nav-link">RÉALISATIONS</a></li>
-                        <li><a href="a-propos.html" class="nav-link">À PROPOS</a></li>
-                        <li><a href="diaspora.html" class="nav-link">DIASPORA</a></li>
-                        <li><a href="contact.html" class="nav-link">CONTACT</a></li>
+                        <li><a href="index.html" class="nav-link" data-translate="ACCUEIL">ACCUEIL</a></li>
+                        <li><a href="services.html" class="nav-link" data-translate="SERVICES">SERVICES</a></li>
+                        <li><a href="mots-du-pdg.html" class="nav-link" data-translate="MOT DU PDG">MOT DU PDG</a></li>
+                        <li><a href="references.html" class="nav-link" data-translate="RÉFÉRENCES">RÉFÉRENCES</a></li>
+                        <li><a href="formation.html" class="nav-link active" data-translate="FORMATION">FORMATION</a></li>
+                        <li><a href="carrieres.html" class="nav-link" data-translate="CARRIÈRES">CARRIÈRES</a></li>
+                        <li><a href="realisations.html" class="nav-link" data-translate="RÉALISATIONS">RÉALISATIONS</a></li>
+                        <li><a href="a-propos.html" class="nav-link" data-translate="À PROPOS">À PROPOS</a></li>
+                        <li><a href="collaborateurs.html" class="nav-link" data-translate="COLLABORATEURS">COLLABORATEURS</a></li>
+                        <li><a href="diaspora.html" class="nav-link" data-translate="DIASPORA">DIASPORA</a></li>
+                        <li><a href="contact.html" class="nav-link" data-translate="CONTACT">CONTACT</a></li>
                     </ul>
                     
                     <a href="contact.html" class="btn-primary">CONTACTER EGCOM</a>
@@ -61,29 +217,118 @@
             </div>
 
             <div class="formations-grid">
-                <div class="formation-card">
-                    <div class="formation-icon">▲</div>
+
+                <div class="formation-card" onclick="document.getElementById('formation').value='lean-management'; document.getElementById('formationForm').scrollIntoView({behavior:'smooth'});">
+                    <div class="formation-card-header">
+                        <div class="formation-icon-circle">📊</div>
+                        <span class="formation-badge">Populaire</span>
+                    </div>
                     <h3>Lean Management</h3>
-                    <p>Optimisez vos processus et éliminez les gaspillages grâce aux principes du Lean Management appliqués au secteur BTP.</p>
+                    <p class="formation-desc">Optimisez vos processus et éliminez les gaspillages grâce aux principes du Lean Management appliqués au secteur BTP.</p>
+                    <ul class="formation-details">
+                        <li>Principes fondamentaux du Lean</li>
+                        <li>Cartographie des flux de valeur</li>
+                        <li>Outils d'amélioration continue</li>
+                        <li>Application au secteur BTP</li>
+                    </ul>
+                    <div class="formation-footer">
+                        <span class="formation-duration">⏱ 5 jours</span>
+                        <span class="formation-cta">S'inscrire →</span>
+                    </div>
                 </div>
 
-                <div class="formation-card">
-                    <div class="formation-icon">■</div>
+                <div class="formation-card" onclick="document.getElementById('formation').value='opc'; document.getElementById('formationForm').scrollIntoView({behavior:'smooth'});">
+                    <div class="formation-card-header">
+                        <div class="formation-icon-circle">📋</div>
+                    </div>
                     <h3>OPC (Ordonnancement, Pilotage, Coordination)</h3>
-                    <p>Maîtrisez la coordination de chantier, la planification et le suivi des travaux pour garantir le respect des délais.</p>
+                    <p class="formation-desc">Maîtrisez la coordination de chantier, la planification et le suivi des travaux pour garantir le respect des délais.</p>
+                    <ul class="formation-details">
+                        <li>Planification et ordonnancement</li>
+                        <li>Coordination des intervenants</li>
+                        <li>Suivi d'avancement chantier</li>
+                        <li>Gestion des aléas et délais</li>
+                    </ul>
+                    <div class="formation-footer">
+                        <span class="formation-duration">⏱ 5 jours</span>
+                        <span class="formation-cta">S'inscrire →</span>
+                    </div>
                 </div>
 
-                <div class="formation-card">
-                    <div class="formation-icon">●</div>
+                <div class="formation-card" onclick="document.getElementById('formation').value='management-general'; document.getElementById('formationForm').scrollIntoView({behavior:'smooth'});">
+                    <div class="formation-card-header">
+                        <div class="formation-icon-circle">👥</div>
+                    </div>
                     <h3>Management Général</h3>
-                    <p>Développez vos compétences en leadership, gestion d'équipe et pilotage stratégique de projets BTP.</p>
+                    <p class="formation-desc">Développez vos compétences en leadership, gestion d'équipe et pilotage stratégique de projets BTP.</p>
+                    <ul class="formation-details">
+                        <li>Leadership et communication</li>
+                        <li>Gestion d'équipe multiculturelle</li>
+                        <li>Prise de décision stratégique</li>
+                        <li>Pilotage de la performance</li>
+                    </ul>
+                    <div class="formation-footer">
+                        <span class="formation-duration">⏱ 3 jours</span>
+                        <span class="formation-cta">S'inscrire →</span>
+                    </div>
                 </div>
 
-                <div class="formation-card">
-                    <div class="formation-icon">◆</div>
-                    <h3>Logiciels BTP</h3>
-                    <p>Formez-vous aux outils numériques essentiels : AutoCAD, Revit, MS Project, Primavera et autres logiciels métiers.</p>
+                <div class="formation-card" onclick="document.getElementById('formation').value='gestion-projet'; document.getElementById('formationForm').scrollIntoView({behavior:'smooth'});">
+                    <div class="formation-card-header">
+                        <div class="formation-icon-circle">🎯</div>
+                        <span class="formation-badge new">Nouveau</span>
+                    </div>
+                    <h3>Gestion de Projet</h3>
+                    <p class="formation-desc">Apprenez les méthodologies et outils essentiels pour piloter vos projets BTP de la conception à la livraison.</p>
+                    <ul class="formation-details">
+                        <li>Cycle de vie d'un projet BTP</li>
+                        <li>Planification et budgétisation</li>
+                        <li>Gestion des risques</li>
+                        <li>Suivi qualité et reporting</li>
+                    </ul>
+                    <div class="formation-footer">
+                        <span class="formation-duration">⏱ 5 jours</span>
+                        <span class="formation-cta">S'inscrire →</span>
+                    </div>
                 </div>
+
+                <div class="formation-card" onclick="document.getElementById('formation').value='metre-planification'; document.getElementById('formationForm').scrollIntoView({behavior:'smooth'});">
+                    <div class="formation-card-header">
+                        <div class="formation-icon-circle">📐</div>
+                        <span class="formation-badge new">Nouveau</span>
+                    </div>
+                    <h3>Métré et Planification</h3>
+                    <p class="formation-desc">Maîtrisez les techniques de métré, l'estimation des quantités et la planification opérationnelle des travaux BTP.</p>
+                    <ul class="formation-details">
+                        <li>Avant-métré et métré détaillé</li>
+                        <li>Estimation des coûts et devis</li>
+                        <li>Planification opérationnelle</li>
+                        <li>Outils de suivi budgétaire</li>
+                    </ul>
+                    <div class="formation-footer">
+                        <span class="formation-duration">⏱ 5 jours</span>
+                        <span class="formation-cta">S'inscrire →</span>
+                    </div>
+                </div>
+
+                <div class="formation-card" onclick="document.getElementById('formation').value='logiciels-btp'; document.getElementById('formationForm').scrollIntoView({behavior:'smooth'});">
+                    <div class="formation-card-header">
+                        <div class="formation-icon-circle">💻</div>
+                    </div>
+                    <h3>Logiciels BTP</h3>
+                    <p class="formation-desc">Formez-vous aux outils numériques essentiels : AutoCAD, Revit, MS Project, Primavera et autres logiciels métiers.</p>
+                    <ul class="formation-details">
+                        <li>AutoCAD & Revit (BIM)</li>
+                        <li>MS Project & Primavera</li>
+                        <li>Logiciels de métrés</li>
+                        <li>Outils collaboratifs BTP</li>
+                    </ul>
+                    <div class="formation-footer">
+                        <span class="formation-duration">⏱ 5 jours</span>
+                        <span class="formation-cta">S'inscrire →</span>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
@@ -160,6 +405,8 @@
                                 <option value="lean-management">Lean Management</option>
                                 <option value="opc">OPC (Ordonnancement, Pilotage, Coordination)</option>
                                 <option value="management-general">Management Général</option>
+                                <option value="gestion-projet">Gestion de Projet</option>
+                                <option value="metre-planification">Métré et Planification</option>
                                 <option value="logiciels-btp">Logiciels BTP</option>
                                 <option value="autre">Autre formation</option>
                             </select>
@@ -175,7 +422,10 @@
                             <textarea id="message" name="message" rows="5" required placeholder="Décrivez vos besoins, vos objectifs de formation, vos disponibilités..."></textarea>
                         </div>
 
-                        <button type="submit" class="btn-primary">ENVOYER LA DEMANDE</button>
+                        <button type="submit" class="btn-primary" id="submitBtn">
+                            <span class="btn-text">ENVOYER LA DEMANDE</span>
+                            <span class="btn-loading" style="display: none;">Envoi en cours...</span>
+                        </button>
                         <div id="formationMessage" class="form-message"></div>
                     </form>
                 </div>
@@ -221,13 +471,19 @@
                 <div class="footer-col">
                     <h4>Suivez-nous</h4>
                     <div class="social-links">
-                        <a href="#" class="social-link" aria-label="Facebook">
+                        <a href="https://www.facebook.com/share/1SWC6RxCrE/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Facebook">
                             <span class="social-icon">📘</span> Facebook
                         </a>
-                        <a href="#" class="social-link" aria-label="LinkedIn">
+                        <a href="https://www.linkedin.com/company/116022323/about/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn">
                             <span class="social-icon">💼</span> LinkedIn
                         </a>
-                        <a href="#" class="social-link" aria-label="Twitter">
+                        <a href="https://www.instagram.com/egcom.projets23/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram">
+                            <span class="social-icon">📷</span> Instagram
+                        </a>
+                        <a href="https://www.youtube.com/@Management-q4f" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="YouTube">
+                            <span class="social-icon">▶️</span> YouTube
+                        </a>
+                        <a href="#" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Twitter">
                             <span class="social-icon">🐦</span> Twitter
                         </a>
                     </div>
@@ -240,23 +496,32 @@
     </footer>
 
     <script src="assets/js/main.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script>
-        // Initialiser Supabase
-        const SUPABASE_URL = 'https://bdalhwzrbvnnibtsqsni.supabase.co';
-        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJkYWxod3pyYnZubmlidHNxc25pIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU5MTczMjUsImV4cCI6MjA5MTQ5MzMyNX0.Su_WowiZbRxhx_MEdoVvHfLjvISduLXrOpsBxaykhjw';
-        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        // CONFIGURATION EMAILJS (même config que contact.html)
+        const EMAILJS_PUBLIC_KEY = '9_7Qz6ZS3bPq2aw9M';
+        const EMAILJS_SERVICE_ID = 'service_weszu8y';
+        const EMAILJS_TEMPLATE_ID = 'template_b0qrauh';
+        
+        // Initialiser EmailJS
+        emailjs.init(EMAILJS_PUBLIC_KEY);
 
         // Gestion du formulaire de formation
         document.getElementById('formationForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
-            const messageDiv = document.getElementById('formationMessage');
-            const submitButton = this.querySelector('button[type="submit"]');
+            const submitBtn = document.getElementById('submitBtn');
+            const btnText = submitBtn.querySelector('.btn-text');
+            const btnLoading = submitBtn.querySelector('.btn-loading');
+            const formMessage = document.getElementById('formationMessage');
             
-            // Désactiver le bouton pendant l'envoi
-            submitButton.disabled = true;
-            submitButton.textContent = 'ENVOI EN COURS...';
+            // État loading
+            btnText.style.display = 'none';
+            btnLoading.style.display = 'inline';
+            submitBtn.disabled = true;
+            formMessage.textContent = '';
+            formMessage.className = 'form-message';
             
             // Récupérer les données du formulaire
             const formData = {
@@ -264,38 +529,118 @@
                 email: document.getElementById('email').value,
                 telephone: document.getElementById('telephone').value,
                 type: document.getElementById('type').value,
-                organisation: document.getElementById('organisation').value,
-                formation: document.getElementById('formation').value,
-                participants: document.getElementById('participants').value,
-                message: document.getElementById('message').value,
-                date_soumission: new Date().toISOString()
+                organisation: document.getElementById('organisation').value || 'Non renseigné',
+                formation: document.getElementById('formation').options[document.getElementById('formation').selectedIndex].text,
+                participants: document.getElementById('participants').value || 'Non précisé',
+                message: document.getElementById('message').value
             };
             
             try {
-                // Envoyer à Supabase
-                const { data, error } = await supabaseClient
-                    .from('demandes_formation')
-                    .insert([formData]);
+                // 1. Envoyer l'email de notification à EGCOM
+                const notificationMessage = `NOUVELLE DEMANDE DE FORMATION
+
+Nom : ${formData.nom}
+Email : ${formData.email}
+Téléphone : ${formData.telephone}
+Profil : ${formData.type}
+Organisation : ${formData.organisation}
+Formation souhaitée : ${formData.formation}
+Nombre de participants : ${formData.participants}
+
+Message / Besoins :
+${formData.message}
+
+---
+Demande envoyée le ${new Date().toLocaleDateString('fr-FR', { day: '2-digit', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' })} via le site EGCOM-PROJETS.`;
+
+                await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        service_id: EMAILJS_SERVICE_ID,
+                        template_id: EMAILJS_TEMPLATE_ID,
+                        user_id: EMAILJS_PUBLIC_KEY,
+                        template_params: {
+                            to_email: 'egcom.projets23@gmail.com',
+                            name: formData.nom,
+                            email: formData.email,
+                            phone: formData.telephone,
+                            projectType: 'Demande de formation - ' + formData.formation,
+                            city: '',
+                            budget: '',
+                            message: notificationMessage
+                        }
+                    })
+                });
                 
-                if (error) throw error;
+                console.log('Email de notification envoyé à EGCOM !');
+                
+                // 2. Envoyer l'email de confirmation au client
+                const confirmationMessage = `Bonjour ${formData.nom},
+
+Merci pour votre demande de formation auprès d'EGCOM-PROJETS !
+
+Nous avons bien reçu votre inscription pour la formation "${formData.formation}".
+
+Voici un récapitulatif de votre demande :
+- Formation : ${formData.formation}
+- Nombre de participants : ${formData.participants}
+- Profil : ${formData.type}
+
+Notre équipe pédagogique va étudier votre demande et vous recontactera sous 48h pour vous proposer un programme adapté à vos besoins, un calendrier et un devis personnalisé.
+
+En attendant, n'hésitez pas à nous contacter pour toute question complémentaire.
+
+Cordialement,
+L'équipe EGCOM-PROJETS
+Email : egcom.projets23@gmail.com
+Tél : +224 625 482 747`;
+
+                await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        service_id: EMAILJS_SERVICE_ID,
+                        template_id: EMAILJS_TEMPLATE_ID,
+                        user_id: EMAILJS_PUBLIC_KEY,
+                        template_params: {
+                            to_email: formData.email,
+                            name: 'EGCOM-PROJETS',
+                            email: 'egcom.projets23@gmail.com',
+                            phone: '+224 625 482 747',
+                            projectType: 'Confirmation - Demande de formation',
+                            city: '',
+                            budget: '',
+                            message: confirmationMessage
+                        }
+                    })
+                });
+                
+                console.log('Email de confirmation envoyé au client !');
                 
                 // Afficher message de succès
-                messageDiv.className = 'form-message success';
-                messageDiv.textContent = 'Votre demande a été envoyée avec succès ! Nous vous contacterons dans les plus brefs délais.';
+                formMessage.innerHTML = '<strong>✓ Demande envoyée avec succès !</strong><br>Merci pour votre intérêt. Un email de confirmation a été envoyé à <strong>' + formData.email + '</strong>. Notre équipe vous recontactera sous 48h.';
+                formMessage.className = 'form-message success';
+                formMessage.style.display = 'block';
                 
                 // Réinitialiser le formulaire
                 this.reset();
                 
+                // Scroll vers le message de succès
+                formMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                
             } catch (error) {
-                console.error('Erreur:', error);
-                messageDiv.className = 'form-message error';
-                messageDiv.textContent = 'Une erreur est survenue. Veuillez réessayer ou nous contacter directement.';
+                console.error('Erreur lors de l\'envoi:', error);
+                formMessage.textContent = '✗ Erreur lors de l\'envoi. Veuillez réessayer ou nous contacter directement par email à egcom.projets23@gmail.com';
+                formMessage.className = 'form-message error';
+                formMessage.style.display = 'block';
             } finally {
-                // Réactiver le bouton
-                submitButton.disabled = false;
-                submitButton.textContent = 'ENVOYER LA DEMANDE';
+                btnText.style.display = 'inline';
+                btnLoading.style.display = 'none';
+                submitBtn.disabled = false;
             }
         });
     </script>
+    <script defer src="assets/js/translate.js"></script>
 </body>
 </html>

@@ -30,10 +30,12 @@
     <meta property="twitter:title" content="EGCOM-PROJETS - Construction & Management de Projets BTP en Guinée">
     <meta property="twitter:description" content="Entreprise leader en BTP en Guinée. Construction, rénovation, management de projets.">
     <meta property="twitter:image" content="https://egcom-projets.github.io/egcom-site-web/Logo%20version%20nouvelle/Logo%2026%2004%2026.png">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://bdalhwzrbvnnibtsqsni.supabase.co" crossorigin>
     <link rel="stylesheet" href="assets/css/styles.css">
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-WH05VV1KFP"></script>
-    <script src="assets/js/analytics.js"></script>
+    <script defer src="assets/js/analytics.js"></script>
     
     <!-- Schema.org structured data -->
     <script type="application/ld+json">
@@ -101,6 +103,7 @@
                         <li><a href="carrieres.html" class="nav-link" data-translate="CARRIÈRES">CARRIÈRES</a></li>
                         <li><a href="realisations.html" class="nav-link" data-translate="RÉALISATIONS">RÉALISATIONS</a></li>
                         <li><a href="a-propos.html" class="nav-link" data-translate="À PROPOS">À PROPOS</a></li>
+                        <li><a href="collaborateurs.html" class="nav-link" data-translate="COLLABORATEURS">COLLABORATEURS</a></li>
                         <li><a href="diaspora.html" class="nav-link" data-translate="DIASPORA">DIASPORA</a></li>
                         <li id="adminLink" style="display: none;"><a href="admin-candidatures.html" class="nav-link" style="color: #DC143C;">🔐 ADMIN</a></li>
                         <li><a href="contact.html" class="nav-link" data-translate="CONTACT">CONTACT</a></li>
@@ -130,7 +133,7 @@
             </div>
         </div>
         <div class="hero-image">
-            <img src="assets/images/hero-building.jpg" alt="Projet EGCOM" onerror="this.style.display='none'">
+            <img src="assets/images/hero-building.jpg" alt="Projet EGCOM" loading="eager" fetchpriority="high" onerror="this.style.display='none'">
         </div>
     </section>
 
@@ -309,19 +312,19 @@
                 <div class="footer-col">
                     <h4>Suivez-nous</h4>
                     <div class="social-links">
-                        <a href="https://www.facebook.com/VOTRE-PAGE-FACEBOOK" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Facebook">
+                        <a href="https://www.facebook.com/share/1SWC6RxCrE/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Facebook">
                             <span class="social-icon">📘</span> Facebook
                         </a>
-                        <a href="https://www.linkedin.com/company/VOTRE-PAGE-LINKEDIN" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn">
+                        <a href="https://www.linkedin.com/company/116022323/about/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn">
                             <span class="social-icon">💼</span> LinkedIn
                         </a>
-                        <a href="https://www.instagram.com/VOTRE-COMPTE-INSTAGRAM" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram">
+                        <a href="https://www.instagram.com/egcom.projets23/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram">
                             <span class="social-icon">📷</span> Instagram
                         </a>
-                        <a href="https://www.youtube.com/@VOTRE-CHAINE-YOUTUBE" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="YouTube">
+                        <a href="https://www.youtube.com/@Management-q4f" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="YouTube">
                             <span class="social-icon">▶️</span> YouTube
                         </a>
-                        <a href="https://twitter.com/VOTRE-COMPTE-TWITTER" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Twitter">
+                        <a href="#" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Twitter">
                             <span class="social-icon">🐦</span> Twitter
                         </a>
                     </div>
@@ -333,6 +336,7 @@
         </div>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="assets/js/supabase-client.js"></script>
     <!-- Barre de progression du scroll -->
     <div class="scroll-progress"></div>
@@ -342,8 +346,8 @@
         <div class="loader-spinner"></div>
     </div>
     
-    <script src="assets/js/main.js"></script>
-    <script src="assets/js/animations.js"></script>
+    <script defer src="assets/js/main.js"></script>
+    <script defer src="assets/js/animations.js"></script>
     <script>
         // Système de traduction simple
         const translations = {
@@ -357,6 +361,7 @@
                 'RÉALISATIONS': 'RÉALISATIONS',
                 'À PROPOS': 'À PROPOS',
                 'DIASPORA': 'DIASPORA',
+                'COLLABORATEURS': 'COLLABORATEURS',
                 'CONTACT': 'CONTACT',
                 'CONTACTER EGCOM-PROJETS': 'CONTACTER EGCOM-PROJETS',
                 'EGCOM-PROJETS': 'EGCOM-PROJETS',
@@ -379,6 +384,7 @@
                 'RÉALISATIONS': 'PROJECTS',
                 'À PROPOS': 'ABOUT',
                 'DIASPORA': 'DIASPORA',
+                'COLLABORATEURS': 'TEAM',
                 'CONTACT': 'CONTACT',
                 'CONTACTER EGCOM-PROJETS': 'CONTACT EGCOM-PROJETS',
                 'EGCOM-PROJETS': 'EGCOM-PROJECTS',
@@ -484,5 +490,6 @@
             if (adminLink) adminLink.style.display = 'block';
         }
     </script>
+    <script defer src="assets/js/translate.js"></script>
 </body>
 </html>

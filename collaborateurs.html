@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collaborateurs - EGCOM-PROJETS</title>
+    <meta name="description" content="Découvrez l'équipe EGCOM-PROJETS : nos collaborateurs, leurs compétences et leurs parcours professionnels">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WH05VV1KFP"></script>
+    <script defer src="assets/js/analytics.js"></script>
+    <style>
+        .collaborateurs-hero {
+            background: linear-gradient(135deg, #003366 0%, #0066CC 100%);
+            padding: 100px 0 60px;
+            color: white;
+            text-align: center;
+        }
+
+        .collaborateurs-hero h1 {
+            font-size: 42px;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .collaborateurs-hero p {
+            font-size: 18px;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .team-section {
+            padding: 80px 0;
+            background: #f9fafb;
+        }
+
+        .team-section .section-title {
+            text-align: center;
+            font-size: 32px;
+            color: #003366;
+            margin-bottom: 50px;
+            font-weight: 800;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .team-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .team-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .team-card-photo {
+            width: 100%;
+            height: 320px;
+            overflow: hidden;
+            position: relative;
+            background: white;
+        }
+
+        .team-card-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: transform 0.4s ease;
+        }
+
+        .team-card:hover .team-card-photo img {
+            transform: scale(1.05);
+        }
+
+        .team-card-photo .photo-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #003366, #0066CC);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 64px;
+        }
+
+        .team-card-info {
+            padding: 30px;
+            text-align: center;
+        }
+
+        .team-card-info h3 {
+            font-size: 22px;
+            color: #003366;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .team-card-info .role {
+            font-size: 14px;
+            color: #DC143C;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        .team-card-info .bio {
+            font-size: 15px;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .team-card-info .competences {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .team-card-info .competence-tag {
+            background: #f0f4ff;
+            color: #003366;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .team-card-social {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            padding: 0 30px 25px;
+        }
+
+        .team-card-social a {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #f0f4ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 16px;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        .team-card-social a:hover {
+            background: #003366;
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .team-cta {
+            text-align: center;
+            padding: 60px 0;
+            background: white;
+        }
+
+        .team-cta h2 {
+            font-size: 28px;
+            color: #003366;
+            margin-bottom: 15px;
+        }
+
+        .team-cta p {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+
+        @media (max-width: 768px) {
+            .collaborateurs-hero h1 {
+                font-size: 28px;
+            }
+
+            .team-grid {
+                grid-template-columns: 1fr;
+                padding: 0 20px;
+            }
+
+            .team-card-photo {
+                height: 260px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Bande supérieure -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-content">
+                <div class="company-name-animated" id="companyName"></div>
+                <div class="top-bar-tagline">
+                    <span class="tagline-item">📐 Concevoir</span>
+                    <span class="tagline-separator">•</span>
+                    <span class="tagline-item">🏗️ Réaliser</span>
+                    <span class="tagline-separator">•</span>
+                    <span class="tagline-item">🔧 Entretenir</span>
+                </div>
+                <div class="language-flags">
+                    <button class="flag-btn active" data-lang="fr" title="Français">
+                        <img src="https://flagcdn.com/w40/fr.png" alt="Français" width="24" height="18">
+                    </button>
+                    <button class="flag-btn" data-lang="en" title="English">
+                        <img src="https://flagcdn.com/w40/gb.png" alt="English" width="24" height="18">
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <header class="header" id="header">
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-wrapper">
+                    <div class="logo">
+                        <a href="index.html">
+                            <img src="Logo%20version%20nouvelle/Logo%2026%2004%2026.png" alt="EGCOM-PROJETS BTP" style="height: 50px;">
+                        </a>
+                    </div>
+                    
+                    <ul class="nav-menu" id="navMenu">
+                        <li><a href="index.html" class="nav-link">ACCUEIL</a></li>
+                        <li><a href="services.html" class="nav-link">SERVICES</a></li>
+                        <li><a href="mots-du-pdg.html" class="nav-link">MOT DU PDG</a></li>
+                        <li><a href="references.html" class="nav-link">RÉFÉRENCES</a></li>
+                        <li><a href="formation.html" class="nav-link">FORMATION</a></li>
+                        <li><a href="carrieres.html" class="nav-link">CARRIÈRES</a></li>
+                        <li><a href="realisations.html" class="nav-link">RÉALISATIONS</a></li>
+                        <li><a href="a-propos.html" class="nav-link">À PROPOS</a></li>
+                        <li><a href="collaborateurs.html" class="nav-link active">COLLABORATEURS</a></li>
+                        <li><a href="diaspora.html" class="nav-link">DIASPORA</a></li>
+                        <li><a href="contact.html" class="nav-link">CONTACT</a></li>
+                    </ul>
+                    
+                    <a href="contact.html" class="btn-primary">CONTACTER EGCOM-PROJETS</a>
+                    
+                    <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <section class="collaborateurs-hero">
+        <div class="container">
+            <h1>NOS COLLABORATEURS</h1>
+            <p>Une équipe d'experts passionnés au service de vos projets</p>
+        </div>
+    </section>
+
+    <section class="team-section">
+        <div class="container">
+            <h2 class="section-title">L'ÉQUIPE EGCOM-PROJETS</h2>
+            <div class="team-grid">
+
+                <!-- DIANE Mohamed - Directeur de Projet -->
+                <div class="team-card">
+                    <div class="team-card-photo">
+                        <img loading="lazy" src="assets/images/team/diane-mohamed.jpeg" alt="DIANE Mohamed" onerror="this.parentElement.innerHTML='<div class=\'photo-placeholder\'>👤</div>'">
+                    </div>
+                    <div class="team-card-info">
+                        <h3>DIANE Mohamed</h3>
+                        <p class="role">Directeur de Projet</p>
+                        <p class="bio">Ingénieur Génie Civil, spécialisé dans la direction et la coordination de projets de construction d'envergure.</p>
+                        <div class="competences">
+                            <span class="competence-tag">Génie Civil</span>
+                            <span class="competence-tag">Direction de Projet</span>
+                            <span class="competence-tag">BTP</span>
+                        </div>
+                    </div>
+                    <div class="team-card-social">
+                        <a href="#" aria-label="LinkedIn">💼</a>
+                        <a href="#" aria-label="Email">✉️</a>
+                    </div>
+                </div>
+
+                <!-- BANGOURA Babalaye - Directeur Technique -->
+                <div class="team-card">
+                    <div class="team-card-photo">
+                        <img loading="lazy" src="assets/images/team/bangoura-babalaye.jpeg" alt="BANGOURA Babalaye" onerror="this.parentElement.innerHTML='<div class=\'photo-placeholder\'>👤</div>'">
+                    </div>
+                    <div class="team-card-info">
+                        <h3>BANGOURA Babalaye</h3>
+                        <p class="role">Directeur Technique</p>
+                        <p class="bio">Ingénieur Génie Civil, en charge de la direction technique et de l'expertise structurelle des projets EGCOM.</p>
+                        <div class="competences">
+                            <span class="competence-tag">Génie Civil</span>
+                            <span class="competence-tag">Direction Technique</span>
+                            <span class="competence-tag">Structures</span>
+                        </div>
+                    </div>
+                    <div class="team-card-social">
+                        <a href="#" aria-label="LinkedIn">💼</a>
+                        <a href="#" aria-label="Email">✉️</a>
+                    </div>
+                </div>
+
+                <!-- DAFFE Naby - DRH -->
+                <div class="team-card">
+                    <div class="team-card-photo">
+                        <img loading="lazy" src="assets/images/team/daffe-naby.jpeg" alt="DAFFE Naby" onerror="this.parentElement.innerHTML='<div class=\'photo-placeholder\'>👤</div>'">
+                    </div>
+                    <div class="team-card-info">
+                        <h3>DAFFE Naby</h3>
+                        <p class="role">Directeur des Ressources Humaines</p>
+                        <p class="bio">En charge de la gestion des ressources humaines, du recrutement et du développement des talents au sein d'EGCOM.</p>
+                        <div class="competences">
+                            <span class="competence-tag">Ressources Humaines</span>
+                            <span class="competence-tag">Recrutement</span>
+                            <span class="competence-tag">Management</span>
+                        </div>
+                    </div>
+                    <div class="team-card-social">
+                        <a href="#" aria-label="LinkedIn">💼</a>
+                        <a href="#" aria-label="Email">✉️</a>
+                    </div>
+                </div>
+
+                <!-- CISSE Mohamed Saliou - RAF -->
+                <div class="team-card">
+                    <div class="team-card-photo">
+                        <img loading="lazy" src="assets/images/team/cisse-mohamed-saliou.png" alt="CISSE Mohamed Saliou" onerror="this.parentElement.innerHTML='<div class=\'photo-placeholder\'>👤</div>'">
+                    </div>
+                    <div class="team-card-info">
+                        <h3>CISSE Mohamed Saliou</h3>
+                        <p class="role">Responsable Administratif et Financier</p>
+                        <p class="bio">En charge de la gestion administrative et financière, assurant la bonne gouvernance et la rigueur budgétaire des projets EGCOM.</p>
+                        <div class="competences">
+                            <span class="competence-tag">Finance</span>
+                            <span class="competence-tag">Administration</span>
+                            <span class="competence-tag">Gestion</span>
+                        </div>
+                    </div>
+                    <div class="team-card-social">
+                        <a href="#" aria-label="LinkedIn">💼</a>
+                        <a href="#" aria-label="Email">✉️</a>
+                    </div>
+                </div>
+
+                <!-- CAMARA Foulematou - Assistante de Direction -->
+                <div class="team-card">
+                    <div class="team-card-photo">
+                        <img loading="lazy" src="assets/images/team/camara-foulematou.png" alt="CAMARA Foulematou" onerror="this.parentElement.innerHTML='<div class=\'photo-placeholder\'>👤</div>'">
+                    </div>
+                    <div class="team-card-info">
+                        <h3>CAMARA Foulematou</h3>
+                        <p class="role">Assistante de Direction</p>
+                        <p class="bio">En charge de l'assistance à la direction générale, de la coordination administrative et du suivi organisationnel d'EGCOM.</p>
+                        <div class="competences">
+                            <span class="competence-tag">Assistance de Direction</span>
+                            <span class="competence-tag">Coordination</span>
+                            <span class="competence-tag">Organisation</span>
+                        </div>
+                    </div>
+                    <div class="team-card-social">
+                        <a href="#" aria-label="LinkedIn">💼</a>
+                        <a href="#" aria-label="Email">✉️</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="team-cta">
+        <div class="container">
+            <h2>REJOIGNEZ NOTRE ÉQUIPE</h2>
+            <p>Nous recherchons des talents passionnés pour renforcer notre équipe.</p>
+            <a href="carrieres.html" class="btn-primary">VOIR LES OFFRES</a>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3>EGCOM-PROJETS</h3>
+                    <p>Construction, rénovation et management de projets BTP de qualité depuis 2023.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Liens rapides</h4>
+                    <ul>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="realisations.html">Réalisations</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li>Email: egcom.projets23@gmail.com</li>
+                        <li>Tél: +224 625 482 747</li>
+                        <li>Adresse: Matoto, Immeuble ECOBANK, Conakry, Guinée</li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Suivez-nous</h4>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/share/1SWC6RxCrE/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Facebook">
+                            <span class="social-icon">📘</span> Facebook
+                        </a>
+                        <a href="https://www.linkedin.com/company/116022323/about/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn">
+                            <span class="social-icon">💼</span> LinkedIn
+                        </a>
+                        <a href="https://www.instagram.com/egcom.projets23/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram">
+                            <span class="social-icon">📷</span> Instagram
+                        </a>
+                        <a href="https://www.youtube.com/@Management-q4f" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="YouTube">
+                            <span class="social-icon">▶️</span> YouTube
+                        </a>
+                        <a href="#" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Twitter">
+                            <span class="social-icon">🐦</span> Twitter
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 EGCOM-PROJETS. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+    <script defer src="assets/js/translate.js"></script>
+</body>
+</html>

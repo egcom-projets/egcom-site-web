@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="assets/css/styles.css">
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-WH05VV1KFP"></script>
-    <script src="assets/js/analytics.js"></script>
+    <script defer src="assets/js/analytics.js"></script>
 </head>
 <body>
     <header class="header" id="header">
@@ -22,16 +22,17 @@
                     </div>
                     
                     <ul class="nav-menu" id="navMenu">
-                        <li><a href="index.html" class="nav-link">ACCUEIL</a></li>
-                        <li><a href="services.html" class="nav-link">SERVICES</a></li>
-                        <li><a href="mots-du-pdg.html" class="nav-link active">MOT DU PDG</a></li>
-                        <li><a href="references.html" class="nav-link">RÉFÉRENCES</a></li>
-                        <li><a href="formation.html" class="nav-link">FORMATION</a></li>
-                        <li><a href="carrieres.html" class="nav-link">CARRIÈRES</a></li>
-                        <li><a href="realisations.html" class="nav-link">RÉALISATIONS</a></li>
-                        <li><a href="a-propos.html" class="nav-link">À PROPOS</a></li>
-                        <li><a href="diaspora.html" class="nav-link">DIASPORA</a></li>
-                        <li><a href="contact.html" class="nav-link">CONTACT</a></li>
+                        <li><a href="index.html" class="nav-link" data-translate="ACCUEIL">ACCUEIL</a></li>
+                        <li><a href="services.html" class="nav-link" data-translate="SERVICES">SERVICES</a></li>
+                        <li><a href="mots-du-pdg.html" class="nav-link active" data-translate="MOT DU PDG">MOT DU PDG</a></li>
+                        <li><a href="references.html" class="nav-link" data-translate="RÉFÉRENCES">RÉFÉRENCES</a></li>
+                        <li><a href="formation.html" class="nav-link" data-translate="FORMATION">FORMATION</a></li>
+                        <li><a href="carrieres.html" class="nav-link" data-translate="CARRIÈRES">CARRIÈRES</a></li>
+                        <li><a href="realisations.html" class="nav-link" data-translate="RÉALISATIONS">RÉALISATIONS</a></li>
+                        <li><a href="a-propos.html" class="nav-link" data-translate="À PROPOS">À PROPOS</a></li>
+                        <li><a href="collaborateurs.html" class="nav-link" data-translate="COLLABORATEURS">COLLABORATEURS</a></li>
+                        <li><a href="diaspora.html" class="nav-link" data-translate="DIASPORA">DIASPORA</a></li>
+                        <li><a href="contact.html" class="nav-link" data-translate="CONTACT">CONTACT</a></li>
                     </ul>
                     
                     <a href="contact.html" class="btn-primary">CONTACTER EGCOM</a>
@@ -188,13 +189,19 @@
                 <div class="footer-col">
                     <h4>Suivez-nous</h4>
                     <div class="social-links">
-                        <a href="#" class="social-link" aria-label="Facebook">
+                        <a href="https://www.facebook.com/share/1SWC6RxCrE/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Facebook">
                             <span class="social-icon">📘</span> Facebook
                         </a>
-                        <a href="#" class="social-link" aria-label="LinkedIn">
+                        <a href="https://www.linkedin.com/company/116022323/about/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn">
                             <span class="social-icon">💼</span> LinkedIn
                         </a>
-                        <a href="#" class="social-link" aria-label="Twitter">
+                        <a href="https://www.instagram.com/egcom.projets23/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram">
+                            <span class="social-icon">📷</span> Instagram
+                        </a>
+                        <a href="https://www.youtube.com/@Management-q4f" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="YouTube">
+                            <span class="social-icon">▶️</span> YouTube
+                        </a>
+                        <a href="#" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Twitter">
                             <span class="social-icon">🐦</span> Twitter
                         </a>
                     </div>
@@ -207,5 +214,6 @@
     </footer>
 
     <script src="assets/js/main.js"></script>
+    <script defer src="assets/js/translate.js"></script>
 </body>
 </html>

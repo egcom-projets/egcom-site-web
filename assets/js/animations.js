@@ -1,5 +1,24 @@
 // Animations et interactions dynamiques pour EGCOM
 
+// Utilitaire de throttle pour les events scroll
+function throttle(fn, delay = 16) {
+    let lastCall = 0;
+    let rafId = null;
+    return function(...args) {
+        const now = performance.now();
+        if (now - lastCall >= delay) {
+            lastCall = now;
+            fn.apply(this, args);
+        } else if (!rafId) {
+            rafId = requestAnimationFrame(() => {
+                lastCall = performance.now();
+                rafId = null;
+                fn.apply(this, args);
+            });
+        }
+    };
+}
+
 // Animation au scroll - Intersection Observer
 const observerOptions = {
     threshold: 0.1,
@@ -22,13 +41,13 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Effet parallax sur le hero
-window.addEventListener('scroll', () => {
+window.addEventListener('scroll', throttle(() => {
     const scrolled = window.pageYOffset;
     const hero = document.querySelector('.hero');
     if (hero) {
         hero.style.transform = `translateY(${scrolled * 0.5}px)`;
     }
-});
+}));
 
 // Compteur animé pour les statistiques
 function animateCounter(element, target, duration = 2000) {
@@ -152,7 +171,7 @@ window.addEventListener('load', () => {
 });
 
 // Animation de progression au scroll
-window.addEventListener('scroll', () => {
+window.addEventListener('scroll', throttle(() => {
     const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
     const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
     const scrolled = (winScroll / height) * 100;
@@ -161,4 +180,4 @@ window.addEventListener('scroll', () => {
     if (progressBar) {
         progressBar.style.width = scrolled + '%';
     }
-});
+}));
